@@ -53,18 +53,22 @@ Create new test case that will test one endpoint (ws) that name will tell what i
 <br/>
 Every test has to explain what it does in use-case, good practice is to write them as `snake_case`
  Here are some examples:
+
  ```php
  /** @test */
  function only_authorized_user_can_list_products() {
   ... your test goes here
  }
+ 
  ```
+ 
 ```php
   /** @test */
   function name_is_required() {
    ... your test goes here
   }
 ```
+
  ```php
  /** @test */
  function not_found_when_no_category_provided() {
