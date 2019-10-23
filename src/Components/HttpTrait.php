@@ -38,6 +38,10 @@ trait HttpTrait
     {
         $options['body'] = $body;
 
+        if ($this->authorization !== null) {
+            $options = array_merge($options, ['headers' => $this->authorization]);
+        }
+
         $this->response = $this->client->request(Request::METHOD_POST, $route, $options);
 
         return $this->response;
@@ -47,6 +51,10 @@ trait HttpTrait
     {
         $options['query'] = $query;
 
+        if ($this->authorization !== null) {
+            $options = array_merge($options, ['headers' => $this->authorization]);
+        }
+
         $this->response = $this->client->request(Request::METHOD_DELETE, $route, $options);
 
         return $this->response;
@@ -55,6 +63,10 @@ trait HttpTrait
     public function jsonPatch(string $route, array $body, array $options = []): ResponseInterface
     {
         $options['body'] = $body;
+
+        if ($this->authorization !== null) {
+            $options = array_merge($options, ['headers' => $this->authorization]);
+        }
 
         $this->response = $this->client->request(Request::METHOD_PATCH, $route, $options);
 

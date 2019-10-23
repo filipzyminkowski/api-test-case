@@ -37,9 +37,9 @@ trait AssertTrait
 
     private function decodeResponseJson($key = null)
     {
-        $decodedResponse = json_decode($this->response->getContent(), true);
+        $decodedResponse = json_decode($this->response->getContent(false), true);
         if ($decodedResponse === null || $decodedResponse === false) {
-            throw new Exception('Response is not a valid JSON.');
+            throw new Exception('Respoense is not a valid JSON.');
         }
         return $decodedResponse[$key] ?? $decodedResponse;
     }
