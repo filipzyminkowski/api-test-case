@@ -28,7 +28,14 @@ trait AssertTrait
             );
         }
 
-        self::assertTrue(ArraySubset::arrayIntersectRecursive($array, $expected, $fullCheck), $message);
+        $result = ArraySubset::arrayIntersectRecursive($array, $expected, $fullCheck);
+
+        if (!$result) {
+            self::assertSame($expected, $array);
+            self::assertTrue($result);
+        } else {
+            self::assertTrue($result, $message);
+        }
 
         return $this;
     }
