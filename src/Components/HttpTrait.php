@@ -3,6 +3,7 @@
 namespace GlobeGroup\ApiTests\Components;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 trait HttpTrait
@@ -42,7 +43,9 @@ trait HttpTrait
 
         return $this;
     }
-    public function getResponseObject(): ResponseInterface{
+
+    public function getResponseObject(): Response
+    {
         if ($this->response === null) {
             $this->response = $this->client->getResponse();
         }
