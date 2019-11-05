@@ -26,19 +26,21 @@ trait FixturesTrait
         $fixture->load();
     }
 
-    public function clearDatabase()
-    {
+    public function clearDatabase(){
         /** @var ContainerInterface $container */
         $container = self::$kernel->getContainer();
+
         /** @var EntityManager $entityManager */
+        $entityManager = $container->get('doctrine.orm.entity_manager');
+
         $entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
 
-        $entityManager->getConnection()->prepare('SET FOREIGN_KEY_CHECKS = 0;')->execute();
+        $entityManager->getConnection()->prepare("SET FOREIGN_KEY_CHECKS = 0;")->execute();
 
         foreach ($entityManager->getConnection()->getSchemaManager()->listTableNames() as $tableNames) {
-            $sql = 'TRUNCATE TABLE ' . $tableNames . ';';
+            $sql = 'TRUNCATE TABLE ' . $tableNames;
             $entityManager->getConnection()->prepare($sql)->execute();
         }
-        $entityManager->getConnection()->prepare('SET FOREIGN_KEY_CHECKS = 1;')->execute();
+        $entityManager->getConnection()->prepare("SET FOREIGN_KEY_CHECKS = 1;")->execute();
     }
 }
