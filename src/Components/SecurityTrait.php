@@ -2,7 +2,6 @@
 
 namespace GlobeGroup\ApiTests\Components;
 
-use App\Entity\User\User;
 use Exception;
 use GlobeGroup\ApiTests\Exception\NoConfigurationException;
 use Symfony\Component\Security\Core\User\UserInterface;

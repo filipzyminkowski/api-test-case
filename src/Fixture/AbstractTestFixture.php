@@ -10,7 +10,7 @@ abstract class AbstractTestFixture
      * @var EntityManagerInterface
      */
     protected $manager;
-    
+
     public function setManager(EntityManagerInterface $manager)
     {
         $this->manager = $manager;

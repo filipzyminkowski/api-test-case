@@ -2,20 +2,12 @@
 
 namespace GlobeGroup\ApiTests\Components;
 
-use GlobeGroup\ApiTests\ApiTestCase;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-/**
- * Trait HttpTrait
- * @property KernelBrowser client
- * @package GlobeGroup\ApiTests\Components
- */
 trait HttpTrait
 {
-    public function jsonGet(string $route, array $query, array $options = []): ApiTestCase
+    public function jsonGet(string $route, array $query, array $options = []): self
     {
         $options['query'] = $query;
 
@@ -23,18 +15,26 @@ trait HttpTrait
             $options = array_merge($options, ['headers' => $this->authorization]);
         }
 
-        $this->response = $this->client->request(Request::METHOD_GET, $route, $options);
+        $this->start();
+
+        $this->client->request(Request::METHOD_GET, $route, $options);
+        $this->getResponse();
+
+        $this->stop();
 
         return $this;
     }
 
-    public function assertHttpStatus(int $statusCode)
+    public function getResponse(): ResponseInterface
     {
-        self::assertSame($statusCode, (int)$this->response->getStatusCode());
-        return $this;
+        if ($this->response === null) {
+            $this->response = $this->client->getResponse();
+        }
+
+        return $this->response;
     }
 
-    public function jsonPost(string $route, array $body, array $options = []): ResponseInterface
+    public function jsonPost(string $route, array $body, array $options = []): self
     {
         $options['body'] = $body;
 
@@ -42,12 +42,17 @@ trait HttpTrait
             $options = array_merge($options, ['headers' => $this->authorization]);
         }
 
-        $this->response = $this->client->request(Request::METHOD_POST, $route, $options);
+        $this->start();
 
-        return $this->response;
+        $this->client->request(Request::METHOD_POST, $route, $options);
+        $this->getResponse();
+
+        $this->stop();
+
+        return $this;
     }
 
-    public function jsonDelete(string $route, array $query, array $options = []): ResponseInterface
+    public function jsonDelete(string $route, array $query, array $options = []): self
     {
         $options['query'] = $query;
 
@@ -55,12 +60,17 @@ trait HttpTrait
             $options = array_merge($options, ['headers' => $this->authorization]);
         }
 
-        $this->response = $this->client->request(Request::METHOD_DELETE, $route, $options);
+        $this->start();
 
-        return $this->response;
+        $this->client->request(Request::METHOD_DELETE, $route, $options);
+        $this->getResponse();
+
+        $this->stop();
+
+        return $this;
     }
 
-    public function jsonPatch(string $route, array $body, array $options = []): ResponseInterface
+    public function jsonPatch(string $route, array $body, array $options = []): self
     {
         $options['body'] = $body;
 
@@ -68,14 +78,19 @@ trait HttpTrait
             $options = array_merge($options, ['headers' => $this->authorization]);
         }
 
-        $this->response = $this->client->request(Request::METHOD_PATCH, $route, $options);
+        $this->start();
+
+        $this->client->request(Request::METHOD_PATCH, $route, $options);
+        $this->getResponse();
+
+        $this->stop();
 
         return $this->response;
     }
 
     private function createJsonClient()
     {
-        return HttpClient::create([
+        return static::createClient([
             'headers' => [
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',

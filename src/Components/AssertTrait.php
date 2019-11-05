@@ -2,16 +2,14 @@
 
 namespace GlobeGroup\ApiTests\Components;
 
-
 use ArrayAccess;
 use Exception;
 use GlobeGroup\ApiTests\Assert\ArraySubset;
 use PHPUnit\Util\InvalidArgumentHelper;
-use function is_array;
 
 trait AssertTrait
 {
-    public function assertResponseContains(array $expected, bool $fullCheck = false, string $message = ''): self
+    public function assertResponseContains(array $expected, bool $fullCheck = true, string $message = ''): self
     {
         $array = $this->decodeResponseJson();
 
@@ -37,10 +35,17 @@ trait AssertTrait
 
     private function decodeResponseJson($key = null)
     {
-        $decodedResponse = json_decode($this->response->getContent(false), true);
+        $decodedResponse = json_decode($this->getResponse()->getContent(false), true);
         if ($decodedResponse === null || $decodedResponse === false) {
-            throw new Exception('Respoense is not a valid JSON.');
+            throw new Exception('Response is not a valid JSON.' . $this->getResponse()->getContent(false));
         }
         return $decodedResponse[$key] ?? $decodedResponse;
+    }
+
+    public function assertHttpStatus(int $statusCode): self
+    {
+        self::assertSame($statusCode, (int)$this->getResponse()->getStatusCode());
+
+        return $this;
     }
 }

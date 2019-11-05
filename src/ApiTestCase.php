@@ -7,21 +7,16 @@ use GlobeGroup\ApiTests\Components\DebugTrait;
 use GlobeGroup\ApiTests\Components\FixturesTrait;
 use GlobeGroup\ApiTests\Components\HttpTrait;
 use GlobeGroup\ApiTests\Components\SecurityTrait;
-use Hautelook\AliceBundle\PhpUnit\RecreateDatabaseTrait;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
-use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-/**
- * Class ApiTestCase
- */
-abstract class ApiTestCase extends KernelTestCase
+abstract class ApiTestCase extends WebTestCase
 {
-    use ReloadDatabaseTrait, AssertTrait, HttpTrait, FixturesTrait,
+    use RefreshDatabaseTrait, AssertTrait, HttpTrait, FixturesTrait,
         SecurityTrait, DebugTrait;
 
     /**
@@ -44,16 +39,19 @@ abstract class ApiTestCase extends KernelTestCase
      */
     private $authorization;
 
-    public function getContainer(): ContainerInterface
-    {
-        return self::$container;
-    }
+    /** @var bool */
+    private $doMeasurement;
 
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
         self::$purgeWithTruncate = true;
         self::$append = false;
+    }
+
+    public function getContainer(): ContainerInterface
+    {
+        return self::$container;
     }
 
     protected function setUp()
@@ -64,6 +62,7 @@ abstract class ApiTestCase extends KernelTestCase
 
         $this->client = $this->createJsonClient();
         $this->authorization = null;
+        $this->doMeasurement = false;
     }
 
     protected function tearDown()
