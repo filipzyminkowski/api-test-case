@@ -18,20 +18,11 @@ trait HttpTrait
         $this->start();
 
         $this->client->request(Request::METHOD_GET, $route, $options);
-        $this->getResponse();
+        $this->getResponseObject();
 
         $this->stop();
 
         return $this;
-    }
-
-    public function getResponse(): ResponseInterface
-    {
-        if ($this->response === null) {
-            $this->response = $this->client->getResponse();
-        }
-
-        return $this->response;
     }
 
     public function jsonPost(string $route, array $body, array $options = []): self
@@ -45,11 +36,18 @@ trait HttpTrait
         $this->start();
 
         $this->client->request(Request::METHOD_POST, $route, $options);
-        $this->getResponse();
+        $this->getResponseObject();
 
         $this->stop();
 
         return $this;
+    }
+    public function getResponseObject(): ResponseInterface{
+        if ($this->response === null) {
+            $this->response = $this->client->getResponse();
+        }
+
+        return $this->response;
     }
 
     public function jsonDelete(string $route, array $query, array $options = []): self
@@ -63,7 +61,7 @@ trait HttpTrait
         $this->start();
 
         $this->client->request(Request::METHOD_DELETE, $route, $options);
-        $this->getResponse();
+        $this->getResponseObject();
 
         $this->stop();
 
@@ -81,7 +79,7 @@ trait HttpTrait
         $this->start();
 
         $this->client->request(Request::METHOD_PATCH, $route, $options);
-        $this->getResponse();
+        $this->getResponseObject();
 
         $this->stop();
 

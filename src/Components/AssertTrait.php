@@ -35,16 +35,16 @@ trait AssertTrait
 
     private function decodeResponseJson($key = null)
     {
-        $decodedResponse = json_decode($this->getResponse()->getContent(false), true);
+        $decodedResponse = json_decode($this->getResponseObject()->getContent(false), true);
         if ($decodedResponse === null || $decodedResponse === false) {
-            throw new Exception('Response is not a valid JSON.' . $this->getResponse()->getContent(false));
+            throw new Exception('Response is not a valid JSON.' . $this->getResponseObject()->getContent(false));
         }
         return $decodedResponse[$key] ?? $decodedResponse;
     }
 
     public function assertHttpStatus(int $statusCode): self
     {
-        self::assertSame($statusCode, (int)$this->getResponse()->getStatusCode());
+        self::assertSame($statusCode, (int)$this->getResponseObject()->getStatusCode());
 
         return $this;
     }
