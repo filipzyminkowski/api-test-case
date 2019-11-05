@@ -10,7 +10,7 @@ trait HttpTrait
 {
     public function jsonGet(string $route, array $query, array $options = []): self
     {
-        $options['query'] = $query;
+        $options = array_merge($options , $query);
 
         if ($this->authorization !== null) {
             $options = array_merge($options, ['headers' => $this->authorization]);
@@ -28,7 +28,7 @@ trait HttpTrait
 
     public function jsonPost(string $route, array $body, array $options = []): self
     {
-        $options['body'] = $body;
+        $options = array_merge($options , $body);
 
         if ($this->authorization !== null) {
             $options = array_merge($options, ['headers' => $this->authorization]);
@@ -55,7 +55,7 @@ trait HttpTrait
 
     public function jsonDelete(string $route, array $query, array $options = []): self
     {
-        $options['query'] = $query;
+        $options = array_merge($options , $query);
 
         if ($this->authorization !== null) {
             $options = array_merge($options, ['headers' => $this->authorization]);
@@ -73,7 +73,7 @@ trait HttpTrait
 
     public function jsonPatch(string $route, array $body, array $options = []): self
     {
-        $options['body'] = $body;
+        $options = array_merge($options , $body);
 
         if ($this->authorization !== null) {
             $options = array_merge($options, ['headers' => $this->authorization]);

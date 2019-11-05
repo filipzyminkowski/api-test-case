@@ -7,6 +7,7 @@ class ArraySubset
     public static function arrayIntersectRecursive(array $arr1, array $arr2, bool $fullCheck)
     {
         $arrayResult = self::checkComplementary($arr1, $arr2, $fullCheck);
+        print_r($arrayResult);
         if (empty($arrayResult)) {
             return false;
         }

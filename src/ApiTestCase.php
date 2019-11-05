@@ -67,7 +67,7 @@ abstract class ApiTestCase extends WebTestCase
 
     protected function tearDown()
     {
-        $this->clearDatabase();
+    //    $this->clearDatabase();
         parent::tearDown();
     }
 }
