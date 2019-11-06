@@ -1,0 +1,6 @@
+{
+    "copy-from-package": {
+        "config/packages/test/services.yaml": "%CONFIG_DIR%/packages/test/services.yaml",
+        "config/faker": "%CONFIG_DIR%/faker"
+    }
+}
