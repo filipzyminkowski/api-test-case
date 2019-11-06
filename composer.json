@@ -29,12 +29,17 @@
     "phpunit/phpunit": "^7",
     "ext-json": "*",
     "friendsofsymfony/oauth-server-bundle": "dev-master",
-    "symfony/browser-kit": "4.3.*"
+    "symfony/browser-kit": "4.3.*",
+    "symfony/flex": "^1.4",
+    "fzaninotto/faker": "^1.8"
   },
   "scripts": {
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd"
     }
+  },
+  "conflict": {
+    "symfony/symfony": "*"
   }
 }
