@@ -4,12 +4,14 @@ namespace GlobeGroup\ApiTests\Components;
 
 use Exception;
 use GlobeGroup\ApiTests\Exception\NoConfigurationException;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 trait SecurityTrait
 {
     protected function logIn(string $email, string $role)
     {
+        /** @var Container $container */
         $container = self::$kernel->getContainer();
 
         $manager = $container->get('doctrine.orm.entity_manager');
@@ -27,6 +29,7 @@ trait SecurityTrait
 
         $manager->persist($object);
         $manager->flush();
+
         if ($object instanceof UserInterface) {
             try {
                 $client = $container->get('test.oauth.client');
@@ -46,6 +49,7 @@ trait SecurityTrait
             } catch (Exception $e) {
                 throw new NoConfigurationException('No token entity provided in services.yaml.');
             }
+
             $token->setUser($object);
             $token->setToken('FOR_TESTING_PURPOSES_ONLY');
             $token->setClient($client);
@@ -53,6 +57,6 @@ trait SecurityTrait
             $manager->flush();
         }
 
-        $this->authorization = ['Authorization' => 'Bearer FOR_TESTING_PURPOSES_ONLY'];
+        $this->authorization = ['HTTP_AUTHORIZATION' => 'Bearer FOR_TESTING_PURPOSES_ONLY'];
     }
 }
