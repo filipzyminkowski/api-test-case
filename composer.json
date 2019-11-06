@@ -2,6 +2,7 @@
   "name": "globegroup/api-test-case",
   "type": "library",
   "description": "",
+  "license": "MIT",
   "authors": [
     {
       "name": "filip.zyminkowski",
