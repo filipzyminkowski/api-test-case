@@ -508,7 +508,7 @@
             "authors": [
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "homepage": "https://symfony.com/contributors"
                 },
                 {
                     "name": "Benjamin Eberlei",
@@ -593,7 +593,7 @@
             "authors": [
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "homepage": "https://symfony.com/contributors"
                 },
                 {
                     "name": "Benjamin Eberlei",
@@ -669,7 +669,7 @@
             "authors": [
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "homepage": "https://symfony.com/contributors"
                 },
                 {
                     "name": "Doctrine Project",
@@ -5004,7 +5004,7 @@
             "authors": [
                 {
                     "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
+                    "homepage": "https://symfony.com/contributors"
                 },
                 {
                     "name": "Fabien Potencier",
@@ -5012,7 +5012,7 @@
                 }
             ],
             "description": "Symfony MonologBundle",
-            "homepage": "http://symfony.com",
+            "homepage": "https://symfony.com",
             "keywords": [
                 "log",
                 "logging"
