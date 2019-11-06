@@ -2,10 +2,12 @@
 
 namespace GlobeGroup\ApiTests\Components;
 
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
+/** @property KernelBrowser client */
 trait HttpTrait
 {
     public function jsonGet(string $route, array $query, array $options = []): self
@@ -17,10 +19,11 @@ trait HttpTrait
         }
 
         $this->start();
+        $
 
-        $this->client->request(Request::METHOD_GET, $route, $options);
+        $this->client->request(Request::METHOD_GET, $route, ['HTTP_AUTHORIZATION'=> 'xd']);
         $this->getResponseObject();
-
+dump($this->client->getRequest()->headers->s);
         $this->stop();
 
         return $this;
