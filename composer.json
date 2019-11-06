@@ -1,7 +1,8 @@
 {
   "name": "globegroup/api-test-case",
   "type": "library",
-  "description": "",
+  "license": "MIT",
+  "description": "GlobeGroup Functional Unit Tests Library for Symfony 4.3",
   "authors": [
     {
       "name": "filip.zyminkowski",
