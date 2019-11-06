@@ -1,5 +1,5 @@
 {
-  "copy-from-package": {
+  "copy-from-recipe": {
     "config/packages/test/services.yaml": "%CONFIG_DIR%/packages/test/services.yaml",
     "config/faker/": "%CONFIG_DIR%/faker/"
   }
