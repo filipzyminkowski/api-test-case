@@ -1,26 +1,26 @@
 services:
-  # Enabling Fixtures to easy load them while running tests
-  App\Tests\Fixture:
-    resource: '%kernel.project_dir%/tests/Fixture/*'
-    calls:
-      - method: setManager
-        arguments:
-          - '@doctrine.orm.entity_manager'
-    public: true
-    autowire: true
+    # Enabling Fixtures to easy load them while running tests
+    App\Tests\Fixture:
+        resource: '%kernel.project_dir%/tests/Fixture/*'
+        calls:
+            -   method: setManager
+                arguments:
+                    - '@doctrine.orm.entity_manager'
+        public: true
+        autowire: true
 
-  # Here comes configuration for oAuth
-  test.oauth.user:
-    class: App\Entity\User #your user entity
-    public: true
-    autowire: true
+    # Here comes configuration for oAuth
+    test.oauth.user:
+        class: App\Entity\User #your user entity
+        public: true
+        autowire: true
 
-  test.oauth.client:
-    class: App\Entity\OAuth2\Client #your oauth client entity
-    public: true
-    autowire: true
+    test.oauth.client:
+        class: App\Entity\OAuth2\Client #your oauth client entity
+        public: true
+        autowire: true
 
-  test.oauth.token:
-    class: App\Entity\OAuth2\AccessToken #your oauth access token entity
-    public: true
-    autowire: true
+    test.oauth.token:
+        class: App\Entity\OAuth2\AccessToken #your oauth access token entity
+        public: true
+        autowire: true
