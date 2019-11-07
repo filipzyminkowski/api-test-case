@@ -20,7 +20,7 @@ trait HttpTrait
 
         $this->start();
 
-        $this->client->request(Request::METHOD_GET, $route, $query, $options);
+        $this->client->request(Request::METHOD_GET, $route, $query, [], $options);
         $this->getResponseObject();
 
         $this->stop();
@@ -36,7 +36,7 @@ trait HttpTrait
 
         $this->start();
 
-        $this->client->request(Request::METHOD_POST, $route, $body, $options);
+        $this->client->request(Request::METHOD_POST, $route, $body, [], $options);
         $this->getResponseObject();
 
         $this->stop();
@@ -61,7 +61,7 @@ trait HttpTrait
 
         $this->start();
 
-        $this->client->request(Request::METHOD_DELETE, $route, $query, $options);
+        $this->client->request(Request::METHOD_DELETE, $route, $query, [], $options);
         $this->getResponseObject();
 
         $this->stop();
@@ -77,7 +77,7 @@ trait HttpTrait
 
         $this->start();
 
-        $this->client->request(Request::METHOD_PATCH, $route, $body, $options);
+        $this->client->request(Request::METHOD_PATCH, $route, $body, [], $options);
         $this->getResponseObject();
 
         $this->stop();
