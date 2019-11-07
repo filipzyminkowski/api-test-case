@@ -16,7 +16,7 @@ Paste configuration to your newly created `services.yml`:
 ```yaml
 services:
 # Enabling Fixtures to easy load them while running tests
-  App\Tests\Fixture:
+  App\Tests\Fixture\:
     resource: '%kernel.project_dir%/tests/Fixture/*'
     calls:
       - method: setManager
