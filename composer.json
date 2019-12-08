@@ -1,45 +1,40 @@
 {
-    "name": "globegroup/api-test-case",
-    "type": "library",
-    "description": "",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "filip.zyminkowski",
-            "email": "filip.zyminkowski@globegroup.pl"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "GlobeGroup\\Test\\": "tests",
-            "GlobeGroup\\ApiTests\\": "src"
-        }
-    },
-    "require": {
-        "symfony/phpunit-bridge": "4.3.*",
-        "hautelook/alice-bundle": "^2.5",
-        "symfony/http-client": "^4.3",
-        "symfony/console": "4.3.*",
-        "symfony/dotenv": "4.3.*",
-        "symfony/framework-bundle": "4.3.*",
-        "symfony/monolog-bundle": "^3.4",
-        "symfony/orm-pack": "^1.0",
-        "symfony/validator": "4.3.*",
-        "symfony/yaml": "4.3.*",
-        "phpunit/phpunit": "^7",
-        "ext-json": "*",
-        "friendsofsymfony/oauth-server-bundle": "dev-master",
-        "symfony/browser-kit": "4.3.*",
-        "symfony/flex": "^1.4",
-        "fzaninotto/faker": "^1.8"
-    },
-    "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
-        }
-    },
-    "conflict": {
-        "symfony/symfony": "*"
+  "name": "globegroup/api-test-case",
+  "type": "library",
+  "license": "MIT",
+  "description": "GlobeGroup Functional Unit Tests Library for Symfony 4.3",
+  "authors": [
+    {
+      "name": "filip.zyminkowski",
+      "email": "filip.zyminkowski@globegroup.pl"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "GlobeGroup\\Test\\": "tests",
+      "GlobeGroup\\ApiTests\\": "src"
+    }
+  },
+  "require": {
+    "symfony/phpunit-bridge": "4.3.*",
+    "hautelook/alice-bundle": "^2.5",
+    "symfony/http-client": "^4.3",
+    "symfony/console": "4.3.*",
+    "symfony/dotenv": "4.3.*",
+    "symfony/framework-bundle": "4.3.*",
+    "symfony/monolog-bundle": "^3.4",
+    "symfony/orm-pack": "^1.0",
+    "symfony/validator": "4.3.*",
+    "symfony/yaml": "4.3.*",
+    "phpunit/phpunit": "^7",
+    "ext-json": "*",
+    "friendsofsymfony/oauth-server-bundle": "dev-master",
+    "symfony/browser-kit": "4.3.*"
+  },
+  "scripts": {
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    }
+  }
 }

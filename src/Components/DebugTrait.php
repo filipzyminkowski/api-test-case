@@ -6,7 +6,7 @@ trait DebugTrait
 {
     public function dump()
     {
-        print_r($this->response->getContent(true));
+        print_r($this->getResponseObject()->getContent(true));
 
         return $this;
     }

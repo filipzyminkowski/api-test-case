@@ -6,7 +6,14 @@ use ArrayAccess;
 use Exception;
 use GlobeGroup\ApiTests\Assert\ArraySubset;
 use PHPUnit\Util\InvalidArgumentHelper;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Component\HttpFoundation\Response;
 
+
+/**
+ * @property KernelBrowser client
+ * @property Response response
+ */
 trait AssertTrait
 {
     public function assertResponseContains(array $expected, bool $fullCheck = true, string $message = ''): self

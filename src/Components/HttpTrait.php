@@ -5,41 +5,38 @@ namespace GlobeGroup\ApiTests\Components;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
-/** @property KernelBrowser client */
+/**
+ * @property KernelBrowser client
+ * @property Response response
+ */
 trait HttpTrait
 {
-    public function jsonGet(string $route, array $query, array $options = []): self
+    public function jsonGet(string $route, array $query = [], array $options = []): self
     {
-        $options = array_merge($options , $query);
-
         if ($this->authorization !== null) {
-            $options = array_merge($options, ['headers' => $this->authorization]);
+            $options = array_merge($options, $this->authorization);
         }
 
         $this->start();
-        $
 
-        $this->client->request(Request::METHOD_GET, $route, ['HTTP_AUTHORIZATION'=> 'xd']);
+        $this->client->request(Request::METHOD_GET, $route, $query, [], $options);
         $this->getResponseObject();
-dump($this->client->getRequest()->headers->s);
+
         $this->stop();
 
         return $this;
     }
 
-    public function jsonPost(string $route, array $body, array $options = []): self
+    public function jsonPost(string $route, array $body = [], array $options = []): self
     {
-        $options = array_merge($options , $body);
-
         if ($this->authorization !== null) {
-            $options = array_merge($options, ['headers' => $this->authorization]);
+            $options = array_merge($options, $this->authorization);
         }
 
         $this->start();
 
-        $this->client->request(Request::METHOD_POST, $route, $options);
+        $this->client->request(Request::METHOD_POST, $route, $body, [], $options);
         $this->getResponseObject();
 
         $this->stop();
@@ -56,17 +53,15 @@ dump($this->client->getRequest()->headers->s);
         return $this->response;
     }
 
-    public function jsonDelete(string $route, array $query, array $options = []): self
+    public function jsonDelete(string $route, array $query = [], array $options = []): self
     {
-        $options = array_merge($options , $query);
-
         if ($this->authorization !== null) {
-            $options = array_merge($options, ['headers' => $this->authorization]);
+            $options = array_merge($options, $this->authorization);
         }
 
         $this->start();
 
-        $this->client->request(Request::METHOD_DELETE, $route, $options);
+        $this->client->request(Request::METHOD_DELETE, $route, $query, [], $options);
         $this->getResponseObject();
 
         $this->stop();
@@ -76,29 +71,25 @@ dump($this->client->getRequest()->headers->s);
 
     public function jsonPatch(string $route, array $body, array $options = []): self
     {
-        $options = array_merge($options , $body);
-
         if ($this->authorization !== null) {
-            $options = array_merge($options, ['headers' => $this->authorization]);
+            $options = array_merge($options, $this->authorization);
         }
 
         $this->start();
 
-        $this->client->request(Request::METHOD_PATCH, $route, $options);
+        $this->client->request(Request::METHOD_PATCH, $route, $body, [], $options);
         $this->getResponseObject();
 
         $this->stop();
 
-        return $this->response;
+        return $this;
     }
 
     private function createJsonClient()
     {
-        return static::createClient([
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
+        return static::createClient([], [
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_CONTENT-TYPE' => 'application/json',
         ]);
     }
 }

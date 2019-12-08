@@ -16,7 +16,7 @@ Paste configuration to your newly created `services.yml`:
 ```yaml
 services:
 # Enabling Fixtures to easy load them while running tests
-  App\Tests\Fixture:
+  App\Tests\Fixture\:
     resource: '%kernel.project_dir%/tests/Fixture/*'
     calls:
       - method: setManager
@@ -81,14 +81,5 @@ Every test has to explain what it does in use-case, good practice is to write th
 ### Changelog:<br/>
  - v0.1 - ApiTestCase, Traits, loading fixtures, asserting json, asserting status code
  - v1.0 - added oauth login, fixed array subset assertion, debug trait, changed to work in transaction
- 
-
-# TODO
-- rozwiązać problem dlaczego nie można użyć `RefreshDatabaseTrait` - nie ładuje środowiska testowego..
-- przenieść `TODO` do issue w gitlabie
-- wyczyścić `composer.json` 
-- dopisać asercje na bazie danych głównie `assertDatabaseCointains` i `assertDatabaseMissing`
-- dopisać asercje na odpowiedzi `assertResponseMissing` 
-- dopisać `phpdoc'i` w traitach 
-- napisać unit testy dla paczki
-- dokończyć `readme.md`
+ - v1.1 - changed to webtestcase
+  
