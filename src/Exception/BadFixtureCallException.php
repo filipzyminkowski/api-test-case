@@ -9,6 +9,6 @@ class BadFixtureCallException extends Exception
 {
     public function __construct(string $classname)
     {
-        parent::__construct('Fixture "' . $classname . '" has to be instance of "' . AbstractTestFixture::class . '.');
+        parent::__construct('Not found valid entity for classname . '. $classname);
     }
 }
