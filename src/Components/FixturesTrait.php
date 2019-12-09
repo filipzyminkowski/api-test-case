@@ -2,27 +2,19 @@
 
 namespace GlobeGroup\ApiTests\Components;
 
-use Doctrine\ORM\EntityManager;
-use GlobeGroup\ApiTests\Exception\BadFixtureCallException;
-use GlobeGroup\ApiTests\Fixture\AbstractTestFixture;
-use Psr\Container\ContainerInterface;
+use GlobeGroup\ApiTests\Factory\EntityFactory;
+use GlobeGroup\ApiTests\Factory\FactoryInterface;
 
 trait FixturesTrait
 {
-    public function loadFixture(string $classname)
+    public static function factory(string $entityClassname, int $i = 1): FactoryInterface
     {
-        /** @var ContainerInterface $container */
         $container = self::$kernel->getContainer();
+        
+        /** @var EntityFactory $factory */
+        $factory = $container->get('test.factory.entity_factory');
+        $factory->defineCreation($entityClassname, $i);
 
-
-        if (!in_array(AbstractTestFixture::class, class_parents($classname), true)) {
-            throw new BadFixtureCallException($classname);
-        }
-
-        $manager = $container->get('doctrine.orm.entity_manager');
-        $manager->getConnection()->getConfiguration()->setSQLLogger(null);
-
-        $fixture = $container->get($classname);
-        $fixture->load();
+        return $factory;
     }
 }
