@@ -10,7 +10,7 @@ trait FixturesTrait
     public static function factory(string $entityClassname, int $i = 1): FactoryInterface
     {
         $container = self::$kernel->getContainer();
-        
+
         /** @var EntityFactory $factory */
         $factory = $container->get('test.factory.entity_factory');
         $factory->defineCreation($entityClassname, $i);

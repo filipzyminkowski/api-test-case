@@ -28,6 +28,15 @@ trait HttpTrait
         return $this;
     }
 
+    public function getResponseObject(): Response
+    {
+        if ($this->response === null) {
+            $this->response = $this->client->getResponse();
+        }
+
+        return $this->response;
+    }
+
     public function jsonPost(string $route, array $body = [], array $options = []): self
     {
         if ($this->authorization !== null) {
@@ -42,15 +51,6 @@ trait HttpTrait
         $this->stop();
 
         return $this;
-    }
-
-    public function getResponseObject(): Response
-    {
-        if ($this->response === null) {
-            $this->response = $this->client->getResponse();
-        }
-
-        return $this->response;
     }
 
     public function jsonDelete(string $route, array $query = [], array $options = []): self

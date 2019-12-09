@@ -57,6 +57,6 @@ trait SecurityTrait
             $manager->flush();
         }
 
-        $this->authorization = ['HTTP_AUTHORIZATION' => 'Bearer '.$token->getToken()];
+        $this->authorization = ['HTTP_AUTHORIZATION' => 'Bearer ' . $token->getToken()];
     }
 }

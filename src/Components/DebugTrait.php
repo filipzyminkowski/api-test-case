@@ -2,6 +2,8 @@
 
 namespace GlobeGroup\ApiTests\Components;
 
+use Exception;
+
 trait DebugTrait
 {
     public function dump()
@@ -13,7 +15,7 @@ trait DebugTrait
 
     public function measure()
     {
-        throw new \Exception('Not implemented yet.');
+        throw new Exception('Not implemented yet.');
 
         $this->doMeasurement = true;
     }

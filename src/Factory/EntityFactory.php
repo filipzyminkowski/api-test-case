@@ -2,9 +2,10 @@
 
 namespace GlobeGroup\ApiTests\Factory;
 
-use GlobeGroup\ApiTests\Exception\BadFixtureCallException;
-use Faker;
+use BadMethodCallException;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker;
+use GlobeGroup\ApiTests\Exception\BadFixtureCallException;
 
 class EntityFactory implements FactoryInterface
 {
@@ -33,14 +34,14 @@ class EntityFactory implements FactoryInterface
      *
      * @throws BadFixtureCallException
      */
-    public function defineCreation(string $entityClassName,int $amount = 1)
+    public function defineCreation(string $entityClassName, int $amount = 1)
     {
         if (!class_exists($entityClassName)) {
             throw new BadFixtureCallException($entityClassName);
         }
 
         if ($amount < 1) {
-            throw new \BadMethodCallException('Amount has to be 1 or greater.');
+            throw new BadMethodCallException('Amount has to be 1 or greater.');
         }
 
         $this->entityClassName = $entityClassName;
@@ -49,7 +50,7 @@ class EntityFactory implements FactoryInterface
 
     public function create(array $fields = [])
     {
-        $this->populator->addEntity($this->entityClassName,$this->amount);
+        $this->populator->addEntity($this->entityClassName, $this->amount);
 
         if ($this->amount === 1) {
             $result = $this->populator->execute($this->manager);
