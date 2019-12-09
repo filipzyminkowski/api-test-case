@@ -27,20 +27,20 @@ abstract class ApiTestCase extends WebTestCase
     /**
      * @var KernelBrowser
      */
-    private $client;
+    protected $client;
 
     /**
      * @var ResponseInterface
      */
-    private $response;
+    protected $response;
 
     /**
      * @var array
      */
-    private $authorization;
+    protected $authorization;
 
     /** @var bool */
-    private $doMeasurement;
+    protected $doMeasurement;
 
     public static function setUpBeforeClass()
     {
