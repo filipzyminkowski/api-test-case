@@ -12,33 +12,4 @@ trait DebugTrait
 
         return $this;
     }
-
-    public function measure()
-    {
-        throw new Exception('Not implemented yet.');
-
-        $this->doMeasurement = true;
-    }
-
-    private function start()
-    {
-        if (!$this->doMeasurement) {
-            return;
-        }
-    }
-
-    private function stop()
-    {
-        if (!$this->doMeasurement) {
-            return;
-        }
-
-        $this->log();
-    }
-
-    private function log()
-    {
-
-    }
-
 }
