@@ -21,20 +21,24 @@ class EntityFactory implements FactoryInterface
     /** @var Faker\ORM\Doctrine\Populator */
     protected $populator;
 
-    public function __construct(EntityManagerInterface $manager)
+    /** @var string */
+    protected $rootDir;
+
+    /** @var array */
+    protected $definitions;
+
+    /** @var Faker\Generator */
+    protected $generator;
+
+    public function __construct(EntityManagerInterface $manager, string $rootDir)
     {
         $this->manager = $manager;
-        $generator = Faker\Factory::create();
-        $this->populator = new Faker\ORM\Doctrine\Populator($generator, $this->manager);
+        $this->rootDir = $rootDir;
+        $this->generator = Faker\Factory::create();
+        $this->populator = new Faker\ORM\Doctrine\Populator($this->generator, $this->manager);
     }
 
-    /**
-     * @param string $entityClassName
-     * @param int $amount
-     *
-     * @throws BadFixtureCallException
-     */
-    public function defineCreation(string $entityClassName, int $amount = 1)
+    public function defineCreation(string $entityClassName, int $amount = 1): void
     {
         if (!class_exists($entityClassName)) {
             throw new BadFixtureCallException($entityClassName);
@@ -50,7 +54,12 @@ class EntityFactory implements FactoryInterface
 
     public function create(array $fields = [])
     {
-        $this->populator->addEntity($this->entityClassName, $this->amount);
+        $this->populator->addEntity(
+            $this->entityClassName,
+            $this->amount,
+            $this->getDefintion(),
+            $fields
+        );
 
         if ($this->amount === 1) {
             $result = $this->populator->execute($this->manager);
@@ -58,5 +67,23 @@ class EntityFactory implements FactoryInterface
         }
 
         return $this->populator->execute($this->manager);
+    }
+
+    protected function getDefintion(): array
+    {
+        if ($this->definitions === null) {
+            /**
+             * @var Faker\Generator $faker
+             * Created for accessing $faker variable from config/faker/faker.php
+             */
+            $faker = $this->generator;
+            $this->definitions = require $this->rootDir . '/config/faker/faker.php';
+        }
+
+        if (array_key_exists($this->entityClassName, $this->definitions)) {
+            return $this->definitions[$this->entityClassName];
+        }
+
+        return [];
     }
 }
