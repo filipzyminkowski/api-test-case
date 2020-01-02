@@ -1,1 +1,0 @@
- <bg=blue;fg=white> </> <bg=blue;fg=white> Next: Configuration </> <bg=blue;fg=white> </> * Modify your ACME_FOO config in <fg=green>.env</> * Modify your ACME_BAR config in <fg=green>.env</> * Configure your parameters in <fg=green>config/packages/acme.yaml</>
