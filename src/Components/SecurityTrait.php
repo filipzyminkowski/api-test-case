@@ -57,6 +57,6 @@ trait SecurityTrait
             $manager->flush();
         }
 
-        $this->authorization = ['HTTP_AUTHORIZATION' => 'Bearer FOR_TESTING_PURPOSES_ONLY'];
+        $this->authorization = ['HTTP_AUTHORIZATION' => 'Bearer ' . $token->getToken()];
     }
 }

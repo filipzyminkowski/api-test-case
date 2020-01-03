@@ -2,7 +2,6 @@
 
 namespace GlobeGroup\ApiTests\Components;
 
-use Doctrine\ORM\EntityManager;
 use GlobeGroup\ApiTests\Exception\BadFixtureCallException;
 use GlobeGroup\ApiTests\Fixture\AbstractTestFixture;
 use Psr\Container\ContainerInterface;

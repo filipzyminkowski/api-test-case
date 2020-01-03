@@ -1,11 +1,11 @@
-# GlobeGroup Functional Unit Tests Library for Symfony 4.3
+# GlobeGroup Functional Unit Tests Library for Symfony 4.4
 ~~~~
 composer require globegroup/api-test-case --dev
 ~~~~
 Every Functional test that you make for your API should extend `GlobeGroup\ApiTest\ApiTestCase`
 <br/><br/>
 This library allows you to easily load fixtures per every test, and restarts the database on before each test.
-Just use `::loadFixture(SampleFicture::class)`. Remember loading fixture that does not extending `GlobeGroup\ApiTest\Fixture\AbstractFixture` will throw an `BadFixtureCallException`.
+
 
 ### Installation
 Create services.yml file under `config/packages/test/`
@@ -15,17 +15,7 @@ touch config/packages/test/services.yaml
 Paste configuration to your newly created `services.yml`:
 ```yaml
 services:
-# Enabling Fixtures to easy load them while running tests
-  App\Tests\Fixture\:
-    resource: '%kernel.project_dir%/tests/Fixture/*'
-    calls:
-      - method: setManager
-        arguments:
-          - '@doctrine.orm.entity_manager'
-    public: true
-    autowire: true
-
-# Here comes configuration for oAuth
+  # Here comes configuration for oAuth
   test.oauth.user:
     class: App\Entity\User\User #your user entity
     public: true
@@ -37,9 +27,10 @@ services:
     autowire: true
 
   test.oauth.token:
-      class: App\Entity\OAuth2\AccessToken #your oauth access token entity
-      public: true
-      autowire: true
+    class: App\Entity\OAuth2\AccessToken #your oauth access token entity
+    public: true
+    autowire: true
+
 ```
 
 ### Using 
@@ -82,4 +73,5 @@ Every test has to explain what it does in use-case, good practice is to write th
  - v0.1 - ApiTestCase, Traits, loading fixtures, asserting json, asserting status code
  - v1.0 - added oauth login, fixed array subset assertion, debug trait, changed to work in transaction
  - v1.1 - changed to webtestcase
+ - v1.2 - added new fixtures way and fixed few problems
   

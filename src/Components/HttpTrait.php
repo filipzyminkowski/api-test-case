@@ -18,28 +18,8 @@ trait HttpTrait
             $options = array_merge($options, $this->authorization);
         }
 
-        $this->start();
-
         $this->client->request(Request::METHOD_GET, $route, $query, [], $options);
         $this->getResponseObject();
-
-        $this->stop();
-
-        return $this;
-    }
-
-    public function jsonPost(string $route, array $body = [], array $options = []): self
-    {
-        if ($this->authorization !== null) {
-            $options = array_merge($options, $this->authorization);
-        }
-
-        $this->start();
-
-        $this->client->request(Request::METHOD_POST, $route, $body, [], $options);
-        $this->getResponseObject();
-
-        $this->stop();
 
         return $this;
     }
@@ -53,18 +33,26 @@ trait HttpTrait
         return $this->response;
     }
 
+    public function jsonPost(string $route, array $body = [], array $options = []): self
+    {
+        if ($this->authorization !== null) {
+            $options = array_merge($options, $this->authorization);
+        }
+
+        $this->client->request(Request::METHOD_POST, $route, $body, [], $options);
+        $this->getResponseObject();
+
+        return $this;
+    }
+
     public function jsonDelete(string $route, array $query = [], array $options = []): self
     {
         if ($this->authorization !== null) {
             $options = array_merge($options, $this->authorization);
         }
 
-        $this->start();
-
         $this->client->request(Request::METHOD_DELETE, $route, $query, [], $options);
         $this->getResponseObject();
-
-        $this->stop();
 
         return $this;
     }
@@ -75,12 +63,20 @@ trait HttpTrait
             $options = array_merge($options, $this->authorization);
         }
 
-        $this->start();
-
         $this->client->request(Request::METHOD_PATCH, $route, $body, [], $options);
         $this->getResponseObject();
 
-        $this->stop();
+        return $this;
+    }
+
+    public function jsonPut(string $route, array $body, array $options = []): self
+    {
+        if ($this->authorization !== null) {
+            $options = array_merge($options, $this->authorization);
+        }
+
+        $this->client->request(Request::METHOD_PUT, $route, $body, [], $options);
+        $this->getResponseObject();
 
         return $this;
     }
