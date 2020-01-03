@@ -1,8 +1,8 @@
 {
   "name": "globegroup/api-test-case",
   "type": "library",
+  "description": "GlobeGroup Functional Unit Tests Library for Symfony ^4.3",
   "license": "MIT",
-  "description": "GlobeGroup Functional Unit Tests Library for Symfony 4.3",
   "authors": [
     {
       "name": "filip.zyminkowski",
@@ -16,20 +16,20 @@
     }
   },
   "require": {
-    "symfony/phpunit-bridge": "4.3.*",
+    "symfony/phpunit-bridge": "^4.3",
     "hautelook/alice-bundle": "^2.5",
     "symfony/http-client": "^4.3",
-    "symfony/console": "4.3.*",
-    "symfony/dotenv": "4.3.*",
-    "symfony/framework-bundle": "4.3.*",
+    "symfony/console": "^4.3",
+    "symfony/dotenv": "^4.3",
+    "symfony/framework-bundle": "^4.3",
     "symfony/monolog-bundle": "^3.4",
     "symfony/orm-pack": "^1.0",
-    "symfony/validator": "4.3.*",
-    "symfony/yaml": "4.3.*",
+    "symfony/validator": "^4.3",
+    "symfony/yaml": "^4.3",
     "phpunit/phpunit": "^7",
     "ext-json": "*",
     "friendsofsymfony/oauth-server-bundle": "dev-master",
-    "symfony/browser-kit": "4.3.*",
+    "symfony/browser-kit": "^4.3",
     "symfony/flex": "^1.4",
     "fzaninotto/faker": "^1.8"
   },
